@@ -107,7 +107,7 @@ class BookController extends Controller
     {
       $formulario = request()->formulario;
       $data       = (new Book)->newQuery();
-      $data       = $data->with('getUser', 'authors')->withTrashed()->get();
+      $data       = $data->with('getUser', 'authors')->withTrashed()->orderby('title', 'asc')->get();
 
       return response()->json([
         'data' => $data,
