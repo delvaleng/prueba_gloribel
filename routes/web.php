@@ -29,6 +29,8 @@ Route::group(['middleware' => 'auth'], function(){
   Route::post('getAuthors',    'AuthorController@getList');
   Route::post('statusAuthor',  'AuthorController@status');
 
-
+  Route::resource('empleados',   'UserController');
+  Route::post('getEmpleados',    'UserController@getList');
+  Route::post('statusEmpleados', 'UserController@status');
 
 });

@@ -117,6 +117,7 @@ class ClientController extends Controller
         $data->phone      = (isset($request{'phone'}))       ? $request{'phone'}      : $data->phone;
         $data->address    = (isset($request{'address'}))     ? $request{'address'}    : $data->address;
         $data->email      = (isset($request{'email'}))       ? $request{'email'}      : $data->email;
+        $data->updated_at = Carbon::now();
         $data->update();
     }
 }

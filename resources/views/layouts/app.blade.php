@@ -53,6 +53,9 @@
                             @endif
                         @else
                         <li class="nav-item">
+                          <a class="nav-link" href="{{ url('/empleados') }}">Empleados</a>
+                        </li>
+                        <li class="nav-item">
                           <a class="nav-link" href="{{ url('/autores') }}">{{ __('Autores') }}</a>
                         </li>
                         <li class="nav-item">

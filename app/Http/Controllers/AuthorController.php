@@ -111,6 +111,7 @@ class AuthorController extends Controller
         $data->lastname   = (isset($request{'lastname'}))    ? $request{'lastname'}   : $data->lastname;
         $data->year_birth = (isset($request{'year_birth'}))  ? $request{'year_birth'} : $data->year_birth;
         $data->year_died  = (isset($request{'year_died'}))   ? $request{'year_died'}  : null;
+        $data->updated_at = Carbon::now();
         $data->update();
     }
 }
