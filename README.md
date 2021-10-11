@@ -1,4 +1,4 @@
-# Sistema de transacciones bancarias en línea
+# Sistema de inventario librerias
 
 ----------
 
@@ -8,13 +8,13 @@
 
 Clone the repository
 
-    git clone git@github.com:delvaleng/banks-sys.git
+    git clone git@github.com:delvaleng/prueba_gloribel.git
 
 Switch to the repo folder
 
-    cd banks-sys
+    cd prueba_gloribel
 
-Generate the database with the name (bank-sys)
+Generate the database with the name (prueba_gloribel)
 
     CREATE DATABASE `prueba_gloribel`
 
