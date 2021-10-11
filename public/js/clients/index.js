@@ -85,6 +85,12 @@ $(document).ready(function() {
                 }
             },
             {
+                data: "get_user",
+                "render": function(data, type, row) {
+                    return data ? data.name : '-';
+                }
+            },
+            {
                 data: "deleted_at",
                 "render": function(data, type, row) {
                      return data ?

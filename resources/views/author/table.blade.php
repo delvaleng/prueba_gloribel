@@ -7,6 +7,7 @@
         <th>Apellido</th>
         <th>Año-Nac</th>
         <th>Año-Muerte</th>
+        <th>Responsable</th>
         <th>Estatus</th>
       </tr>
     </thead>
@@ -20,6 +21,7 @@
         <th>Apellido</th>
         <th>Año-Nac</th>
         <th>Año-Muerte</th>
+        <th>Responsable</th>
         <th>Estatus</th>
       </tr>
     </tfoot>

@@ -19,8 +19,12 @@ class CreateAuthorsTable extends Migration
           $table->string('lastname');
           $table->year('year_birth');
           $table->year('year_died')->nullable();
+          $table->unsignedBigInteger('user_id')->nullable()->default(1);
           $table->softDeletes();
           $table->timestamps();
+          $table->foreign('user_id')->references('id')->on('users')
+                                                      ->onDelete('cascade')
+                                                      ->onUpdate('cascade');
         });
     }
 

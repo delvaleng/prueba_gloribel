@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\User;
+
 
 class Client extends Model
 {
@@ -18,7 +20,13 @@ class Client extends Model
         'year_died',
         'phone',
         'address',
-        'email'
+        'email',
+        'user_id'
     ];
+
+    public function getUser()
+    {
+      return $this->belongsTo(User::class, 'user_id');
+    }
 
 }

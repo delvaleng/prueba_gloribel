@@ -23,7 +23,7 @@ class ClientController extends Controller
 
     public function edit(Request $request, $id)
     {
-      $clients  = Client::withTrashed()->where('id',$id)->first();
+      $clients  = Client::withTrashed()->with('getUser')->where('id',$id)->first();
 
       return view('clients.edit', compact('clients'));
     }
@@ -58,7 +58,8 @@ class ClientController extends Controller
                       ->withErrors($validator);
       }
       $input   = $request->all();
-      $country = Client::create($input);
+      $input{'user_id'} = Auth::user()->id;
+      $data = Client::create($input);
       return redirect(route('clientes.index'));
 
 
@@ -89,7 +90,7 @@ class ClientController extends Controller
     {
       $formulario = request()->formulario;
       $data       = (new Client)->newQuery();
-      $data       = $data->withTrashed()->get();
+      $data       = $data->withTrashed()->with('getUser')->get();
 
       return response()->json([
         'data' => $data,
@@ -99,7 +100,7 @@ class ClientController extends Controller
     public function status(Request $request)
     {
       $id                = request()->id;
-      $data              = Client::withTrashed()->where('id',$id)->first();
+      $data              = Client::withTrashed()->with('getUser')->where('id',$id)->first();
       $data->deleted_at  = $data->deleted_at ?  null  : Carbon::now() ;
       $data->update();
 
@@ -109,7 +110,7 @@ class ClientController extends Controller
     }
 
     protected function updateData($id, $request){
-        $data             = Client::withTrashed()->where('id', $id)->first();
+        $data             = Client::withTrashed()->with('getUser')->where('id', $id)->first();
         $data->name       = (isset($request{'name'}))        ? $request{'name'}       : $data->name;
         $data->lastname   = (isset($request{'lastname'}))    ? $request{'lastname'}   : $data->lastname;
         $data->year_birth = (isset($request{'year_birth'}))  ? $request{'year_birth'} : $data->year_birth;
@@ -118,6 +119,7 @@ class ClientController extends Controller
         $data->address    = (isset($request{'address'}))     ? $request{'address'}    : $data->address;
         $data->email      = (isset($request{'email'}))       ? $request{'email'}      : $data->email;
         $data->updated_at = Carbon::now();
+        $data->user_id    = Auth::user()->id;
         $data->update();
     }
 }

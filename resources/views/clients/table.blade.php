@@ -10,6 +10,7 @@
         <th>Dirección</th>
         <th>Año-Nac</th>
         <th>Año-Muerte</th>
+        <th>Responsable</th>
         <th>Estatus</th>
       </tr>
     </thead>
@@ -26,6 +27,7 @@
         <th>Dirección</th>
         <th>Año-Nac</th>
         <th>Año-Muerte</th>
+        <th>Responsable</th>
         <th>Estatus</th>
       </tr>
     </tfoot>

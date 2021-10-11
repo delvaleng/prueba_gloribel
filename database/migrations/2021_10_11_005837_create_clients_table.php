@@ -22,8 +22,12 @@ class CreateClientsTable extends Migration
           $table->string('phone');
           $table->string('address')->nullable();
           $table->string('email')->unique();
+          $table->unsignedBigInteger('user_id')->nullable()->default(1);
           $table->softDeletes();
           $table->timestamps();
+          $table->foreign('user_id')->references('id')->on('users')
+                                                      ->onDelete('cascade')
+                                                      ->onUpdate('cascade');
         });
     }
 

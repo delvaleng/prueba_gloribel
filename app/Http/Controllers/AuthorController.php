@@ -23,7 +23,7 @@ class AuthorController extends Controller
 
     public function edit(Request $request, $id)
     {
-      $author  = Authors::withTrashed()->where('id',$id)->first();
+      $author  = Authors::withTrashed()->with('getUser')->where('id',$id)->first();
 
       return view('author.edit', compact('author'));
     }
@@ -56,7 +56,8 @@ class AuthorController extends Controller
                       ->withErrors($validator);
       }
       $input   = $request->all();
-      $country = Authors::create($input);
+      $input{'user_id'} = Auth::user()->id;
+      $data = Authors::create($input);
       return redirect(route('autores.index'));
 
 
@@ -85,7 +86,7 @@ class AuthorController extends Controller
     {
       $formulario = request()->formulario;
       $data       = (new Authors)->newQuery();
-      $data       = $data->withTrashed()->get();
+      $data       = $data->with('getUser')->withTrashed()->get();
 
       return response()->json([
         'data' => $data,
@@ -95,7 +96,7 @@ class AuthorController extends Controller
     public function status(Request $request)
     {
       $id                = request()->id;
-      $data              = Authors::withTrashed()->where('id',$id)->first();
+      $data              = Authors::withTrashed()->with('getUser')->where('id',$id)->first();
       $data->deleted_at  = $data->deleted_at ?  null  : Carbon::now() ;
       $data->update();
 
@@ -105,13 +106,15 @@ class AuthorController extends Controller
     }
 
     protected function updateData($id, $request){
-        $data             = Authors::withTrashed()->where('id', $id)->first();
+        $data             = Authors::withTrashed()->with('getUser')->where('id', $id)->first();
 
         $data->name       = (isset($request{'name'}))        ? $request{'name'}       : $data->name;
         $data->lastname   = (isset($request{'lastname'}))    ? $request{'lastname'}   : $data->lastname;
         $data->year_birth = (isset($request{'year_birth'}))  ? $request{'year_birth'} : $data->year_birth;
         $data->year_died  = (isset($request{'year_died'}))   ? $request{'year_died'}  : null;
         $data->updated_at = Carbon::now();
+        $data->user_id    = Auth::user()->id;
+
         $data->update();
     }
 }
