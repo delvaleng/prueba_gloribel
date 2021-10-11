@@ -21,6 +21,19 @@ Route::get('/', function () {
     return redirect()->route('login');
   }
 });
+
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function(){
+
+  Route::resource('clientes',  'ClientController');
+  Route::post('getClients',    'ClientController@getList');
+  Route::post('statusClient',  'ClientController@status');
+
+
+
+
+
+});
