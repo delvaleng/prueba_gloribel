@@ -30,4 +30,14 @@ class HomeController extends Controller
         return redirect()->route('login');
       }
     }
+
+    public function welcome($value='')
+    {
+      if(auth()->check()){
+        return view('home');
+      }
+      else {
+        return redirect()->route('login');
+      }
+    }
 }

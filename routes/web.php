@@ -13,14 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-  if(auth()->check()){
-    return view('home');
-  }
-  else {
-    return redirect()->route('login');
-  }
-});
+Route::get('/', 'HomeController@welcome')->name('welcome');
 
 Auth::routes(['register' => false]);
 
@@ -32,7 +25,9 @@ Route::group(['middleware' => 'auth'], function(){
   Route::post('getClients',    'ClientController@getList');
   Route::post('statusClient',  'ClientController@status');
 
-
+  Route::resource('autores',   'AuthorController');
+  Route::post('getAuthors',    'AuthorController@getList');
+  Route::post('statusAuthor',  'AuthorController@status');
 
 
 

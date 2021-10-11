@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'País')
+@section('title', 'Clientes')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/inputs_sin_icon.css')}}">
@@ -7,27 +7,30 @@
 @endsection
 
 @section('content')
-<section class="content-header">
-  <h1>
-    {{ __('Clients') }}
-  </h1>
-</section>
-  <div class="content">
-    @include('adminlte-templates::common.errors')
-    <div class="box box-success">
-      <div class="box-body">
-        <div class="row">
-          {!! Form::model($country, ['route' => ['clientes.update', $country->id], 'method' => 'patch' , 'id'=>'formEditCountry']) !!}
-            @include('admin.clientes.fields')
-          {!! Form::close() !!}
-        </div>
-      </div>
+
+<div class="container-fluid ma-10">
+  <div class="pa-10 ma -10">
+    <div class="card">
+    <div class="card-header">
+      Editar Cliente
+      <a class="btn float-right btn-primary" href="{!! route('clientes.index') !!}">Listado</a>
+    </div>
+
+    <div class="card-body">
+      <form method="POST" action="{{url('clientes',['id' => $clients->id])}}" id="formClients">
+        <input name="_method" type="hidden" value="PATCH">
+        @csrf
+        @include('clients.fields')
+      </form>
     </div>
   </div>
+  </div>
 @endsection
-
+</div>
 @section('scripts')
-<script src="{{ asset('plugins/jqueryvalidate/jquery.min.js') }}"></script>
-<script src="{{ asset('plugins/jqueryvalidate/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('js/panel/clients/edit.js')}} "></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+<script src="{{ asset('js/clients/create.js')}} "></script>
 @endsection

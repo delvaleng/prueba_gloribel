@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Models\Authors;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class ClientController extends Controller
+class AuthorController extends Controller
 {
 
     public function __construct()
@@ -18,27 +18,27 @@ class ClientController extends Controller
 
     public function index()
     {
-      return view('clients.index');
+      return view('author.index');
     }
 
     public function edit(Request $request, $id)
     {
-      $clients  = Client::withTrashed()->where('id',$id)->first();
+      $author  = Authors::withTrashed()->where('id',$id)->first();
 
-      return view('clients.edit', compact('clients'));
+      return view('author.edit', compact('author'));
     }
 
     public function create()
     {
-      $clients  = null;
-      return view('clients.create', compact('clients'));
+      $author  = null;
+      return view('author.create', compact('author'));
 
     }
 
 
     public function show()
     {
-      return view('clients.index');
+      return view('author.index');
     }
 
 
@@ -48,18 +48,16 @@ class ClientController extends Controller
       $validator = Validator::make($request->all(), [
           'name'                  => 'required|string',
           'lastname'              => 'required|string',
-          'email'                 => 'required|email|unique:clients',
-          'phone'                 => 'required|min:10|unique:clients',
           'year_birth'            => 'digits:4|integer|min:1900|max:'.(date('Y')+1),
       ]);
 
       if ($validator->fails()) {
-          return redirect('clientes/create')
+          return redirect('autores/create')
                       ->withErrors($validator);
       }
       $input   = $request->all();
-      $country = Client::create($input);
-      return redirect(route('clientes.index'));
+      $country = Authors::create($input);
+      return redirect(route('autores.index'));
 
 
     }
@@ -71,24 +69,22 @@ class ClientController extends Controller
       $validator = Validator::make($request->all(), [
           'name'                  => 'required|string',
           'lastname'              => 'required|string',
-          'email'                 => 'required|email|unique:clients,email,'.$id.'',
-          'phone'                 => 'required|min:10|unique:clients,phone,'.$id.'',
           'year_birth'            => 'digits:4|integer|min:1900|max:'.(date('Y')+1),
       ]);
       if ($validator->fails()) {
-          return redirect('clientes/edit')
+          return redirect('autores/edit')
                       ->withErrors($validator);
       }
       $this->updateData($id, $request->all() );
 
-      return redirect(route('clientes.index'));
+      return redirect(route('autores.index'));
     }
 
 
     public function getList(Request $request)
     {
       $formulario = request()->formulario;
-      $data       = (new Client)->newQuery();
+      $data       = (new Authors)->newQuery();
       $data       = $data->withTrashed()->get();
 
       return response()->json([
@@ -99,7 +95,7 @@ class ClientController extends Controller
     public function status(Request $request)
     {
       $id                = request()->id;
-      $data              = Client::withTrashed()->where('id',$id)->first();
+      $data              = Authors::withTrashed()->where('id',$id)->first();
       $data->deleted_at  = $data->deleted_at ?  null  : Carbon::now() ;
       $data->update();
 
@@ -109,14 +105,12 @@ class ClientController extends Controller
     }
 
     protected function updateData($id, $request){
-        $data             = Client::withTrashed()->where('id', $id)->first();
+        $data             = Authors::withTrashed()->where('id', $id)->first();
+
         $data->name       = (isset($request{'name'}))        ? $request{'name'}       : $data->name;
         $data->lastname   = (isset($request{'lastname'}))    ? $request{'lastname'}   : $data->lastname;
         $data->year_birth = (isset($request{'year_birth'}))  ? $request{'year_birth'} : $data->year_birth;
         $data->year_died  = (isset($request{'year_died'}))   ? $request{'year_died'}  : null;
-        $data->phone      = (isset($request{'phone'}))       ? $request{'phone'}      : $data->phone;
-        $data->address    = (isset($request{'address'}))     ? $request{'address'}    : $data->address;
-        $data->email      = (isset($request{'email'}))       ? $request{'email'}      : $data->email;
         $data->update();
     }
 }

@@ -9,6 +9,8 @@ class Client extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'clients';
+
     protected $fillable = [
         'name',
         'lastname',
@@ -17,7 +19,6 @@ class Client extends Model
         'phone',
         'address',
         'email'
-
     ];
 
 }

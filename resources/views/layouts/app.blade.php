@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     @yield('css')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -52,6 +52,9 @@
                                 </li>
                             @endif
                         @else
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ url('/autores') }}">{{ __('Autores') }}</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/clientes') }}">{{ __('Clients') }}</a>
                         </li>

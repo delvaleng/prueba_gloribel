@@ -8,9 +8,9 @@ var table;
 
 $(document).ready(function() {
 
-    table = $('#clients-table').DataTable({
+    table = $('#authors-table').DataTable({
         'ajax': {
-          'url': "/getClients",
+          'url': "/getAuthors",
           'type': "POST",
         },
         'language': {
@@ -38,7 +38,7 @@ $(document).ready(function() {
                 data: "id",
                 "render": function (data, type, row) {
                   return '<div class="btn-group">'+
-                  '<a href="/clientes/'+data+'/edit" class="btn btn-xs btn-primary"> Editar </a>'+
+                  '<a href="/autores/'+data+'/edit" class="btn btn-xs btn-primary"> Editar </a>'+
                   '</div>';
                 }
             },
@@ -50,24 +50,6 @@ $(document).ready(function() {
             },
             {
                 data: "lastname",
-                "render": function(data, type, row) {
-                    return data ? data : '-';
-                }
-            },
-            {
-                data: "email",
-                "render": function(data, type, row) {
-                    return data ? data : '-';
-                }
-            },
-            {
-                data: "phone",
-                "render": function(data, type, row) {
-                    return data ? data : '-';
-                }
-            },
-            {
-                data: "address",
                 "render": function(data, type, row) {
                     return data ? data : '-';
                 }
@@ -102,7 +84,7 @@ $(document).ready(function() {
 function estatusUpload(id) {
 
     $.ajax({
-        url: "/statusClient", //ESTO VARIA
+        url: "/statusAuthor", //ESTO VARIA
         type: "post",
         data: {
             id: id
