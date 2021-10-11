@@ -56,10 +56,13 @@
                           <a class="nav-link" href="{{ url('/empleados') }}">Empleados</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="{{ url('/autores') }}">{{ __('Autores') }}</a>
+                          <a class="nav-link" href="{{ url('/autores') }}">Autores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/clientes') }}">{{ __('Clients') }}</a>
+                            <a class="nav-link" href="{{ url('/clientes') }}">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/libros') }}">Libros</a>
                         </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -112,7 +115,8 @@
       </div><!-- END Logout Modal-->
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     @yield('scripts')
 </body>

@@ -21,16 +21,22 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function(){
 
-  Route::resource('clientes',  'ClientController');
-  Route::post('getClients',    'ClientController@getList');
-  Route::post('statusClient',  'ClientController@status');
+  Route::resource('clientes',     'ClientController');
+  Route::post('getClients',       'ClientController@getList');
+  Route::post('statusClient',     'ClientController@status');
 
-  Route::resource('autores',   'AuthorController');
-  Route::post('getAuthors',    'AuthorController@getList');
-  Route::post('statusAuthor',  'AuthorController@status');
+  Route::resource('autores',      'AuthorController');
+  Route::post('getAuthors',       'AuthorController@getList');
+  Route::post('statusAuthor',     'AuthorController@status');
 
-  Route::resource('empleados',   'UserController');
-  Route::post('getEmpleados',    'UserController@getList');
-  Route::post('statusEmpleados', 'UserController@status');
+  Route::resource('empleados',    'UserController');
+  Route::post('getEmpleados',     'UserController@getList');
+  Route::post('statusEmpleados',  'UserController@status');
+
+  Route::resource('libros',       'BookController');
+  Route::post('getLibros',        'BookController@getList');
+  Route::post('statusLibros',     'BookController@status');
+  Route::post('getAuthor',        'BookController@getAuthor');
+
 
 });

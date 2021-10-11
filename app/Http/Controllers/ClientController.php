@@ -6,6 +6,7 @@ use App\Models\Client;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Auth;
 
 class ClientController extends Controller
 {
